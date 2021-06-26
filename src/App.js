@@ -1,10 +1,12 @@
-import './App.css';
+import { Suspense } from "react";
+import { routerConfig } from '@config/router';
+import Router from './Router';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Router routes={routerConfig} auth={true} />
+    </Suspense>
   );
 }
 
