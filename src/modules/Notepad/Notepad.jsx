@@ -19,6 +19,14 @@ const Notepad = observer((props) => {
     notepadStore.getGists()
   }, [])
 
+  const handleEditNotepad = () => {
+
+  }
+
+  const handleDeleteNotepad = (id) => {
+    notepadStore.deleteGists(id)
+  }
+
   return (
     <div>
       <Grid container className={classes.header} justify="space-between">
@@ -33,7 +41,12 @@ const Notepad = observer((props) => {
       </Grid>
       {notepadStore.notepads.map(gis => {
         return (
-          <NotepadCard key={gis.id} gis={gis}/>
+          <NotepadCard 
+            key={gis.id} 
+            gis={gis} 
+            onEditNotepad={handleEditNotepad} 
+            onDeleteNotepad={handleDeleteNotepad}
+          />
         )
       })}
     </div>

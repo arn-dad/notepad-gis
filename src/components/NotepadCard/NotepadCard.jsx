@@ -26,10 +26,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NotepadCard = (props) => {
-console.log("#AR ~ file: NotepadCard.jsx ~ line 29 ~ NotepadCard ~ props", props);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { gis: { description, owner, created_at } } = props;
+  const { gis: { description, owner, created_at, id } } = props;
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -40,7 +39,7 @@ console.log("#AR ~ file: NotepadCard.jsx ~ line 29 ~ NotepadCard ~ props", props
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const popoverId = open ? 'simple-popover' : undefined;
 
   return (
     <Card className={classes.root}>
@@ -57,7 +56,7 @@ console.log("#AR ~ file: NotepadCard.jsx ~ line 29 ~ NotepadCard ~ props", props
         subheader={dates.toDateFormat(created_at, dates.formats.long)}
       />
       <Popover
-        id={id}
+        id={popoverId}
         open={open}
         anchorEl={anchorEl}
         onClose={handlePopoverClose}
@@ -71,14 +70,14 @@ console.log("#AR ~ file: NotepadCard.jsx ~ line 29 ~ NotepadCard ~ props", props
         }}
       >
         <List component="nav">
-        <ListItem button>
+        <ListItem button onClick={() => props.onEditNotepad(id)}>
           <ListItemIcon>
             <Edit />
           </ListItemIcon>
           <ListItemText primary="Edit" />
         </ListItem>
         <ListItem button>
-          <ListItemIcon>
+          <ListItemIcon onClick={() => props.onDeleteNotepad(id)}>
             <DeleteOutline />
           </ListItemIcon>
           <ListItemText primary="Delete" />

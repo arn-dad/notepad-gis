@@ -15,5 +15,9 @@ export class NotepadAPI extends Service {
   getGists(options) {
     return this.get(this.routes.gists, { baseURL: this.base, ...options })
   }
+
+  deleteGists(id) {
+    return this.delete(`${this.routes.gists}/${id}`, { baseURL: this.base })
+  }
   
 }
