@@ -1,5 +1,5 @@
 import { axios } from '@config/axios';
-import { NotepadAPI } from '@modules/Notepad'
+import { NotepadAPI } from '@modules/Notepad/NotepadAPI'
 
 class Api {
  
