@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   container: {
+    height: 'calc(100% - 64px)',
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },

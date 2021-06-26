@@ -3,11 +3,18 @@ import NotFound from '../../components/NotFound';
 
 export const routerConfig = [
   {
-    id: 'home',
+    id: 'dashboard',
     exact: true,
-    component: React.lazy(() => import('@modules/GistsChart')),
+    component: React.lazy(() => import('@modules/Dashboard')),
     isPrivate: false,
     path: '/'
+  },
+  {
+    id: 'notepad',
+    exact: true,
+    component: React.lazy(() => import('@modules/Notepad')),
+    isPrivate: false,
+    path: '/notepad'
   },
   {
     id: 'not_found',
