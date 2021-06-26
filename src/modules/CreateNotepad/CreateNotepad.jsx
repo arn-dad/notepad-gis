@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import createNotepadStore from './CreateNotepadStore';
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -19,6 +20,10 @@ const CreateNotepad = observer((props) => {
     props.history.goBack();
   }
 
+  const handleCreateNotepad = () => {
+    createNotepadStore.createNotepad({})
+  }
+
   return (
     <div>
      <Grid container className={classes.header} justify="space-between">
@@ -31,7 +36,7 @@ const CreateNotepad = observer((props) => {
           </IconButton>
         </Grid>
         <Grid>
-          <Button variant="outlined" color="primary">Create</Button>
+          <Button variant="outlined" color="primary" onClick={handleCreateNotepad}>Create</Button>
         </Grid>
       </Grid>
     </div>
