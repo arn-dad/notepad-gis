@@ -17,6 +17,13 @@ export const routerConfig = [
     path: '/notepad'
   },
   {
+    id: 'create-notepad',
+    exact: true,
+    component: React.lazy(() => import('@modules/CreateNotepad')),
+    isPrivate: false,
+    path: '/create-notepad'
+  },
+  {
     id: 'not_found',
     exact: true,
     component: NotFound,

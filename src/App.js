@@ -32,14 +32,14 @@ function App() {
       <div className={classes.root}>
       <CssBaseline />
       <NavBar links={linksConfig}/>
-      <Suspense fallback={<div>Loading...</div>}>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg" className={classes.container}>
-          <Switcher routes={routerConfig} auth={true} />
+          <Container maxWidth="xl" className={classes.container}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switcher routes={routerConfig} auth={true} />
+          </Suspense>
           </Container>
         </main>
-      </Suspense>
       </div>
     </BrowserRouter>
   );
