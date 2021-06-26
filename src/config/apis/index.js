@@ -3,5 +3,5 @@ export const apis = {
 }
 
 export const keys = {
-  GISTS_TOKEN: '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'
+  GISTS_TOKEN: process.env.REACT_APP_GISTS_TOKEN
 } 
