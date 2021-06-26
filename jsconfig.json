@@ -6,7 +6,9 @@
     "paths": {
       "@components/*": ["./components/*"], 
       "@modules/*": ["./modules/*"],
-      "@config/*": ["./config/*"]
+      "@config/*": ["./config/*"],
+      "@services/*": ["./services/*"],
+      "@utilities/*": ["./utilities/*"]
      }
   },
   "exclude": ["node_modules", "**/node_modules/*", "build"]
