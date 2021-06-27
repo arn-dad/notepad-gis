@@ -1,11 +1,15 @@
 import { Suspense } from "react";
+import { observer } from 'mobx-react-lite';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Container from '@material-ui/core/Container';
 import { BrowserRouter } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import { routerConfig } from '@config/router';
 import { linksConfig } from '@config/navigation';
 import NavBar from '@components/NavBar';
+import Snackbar from '@components/Snackbar';
+import rootStoreUI from './stores/RootStoreUI';
 import Switcher from './Switcher';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,13 +17,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   appBarSpacer: theme.mixins.toolbar,
+  workspace: {
+    height: 'calc(100% - 64px)',
+  },
   content: {
     flexGrow: 1,
-    height: '100vh',
+    height: '100vh ',
     overflow: 'auto',
   },
   container: {
-    height: 'calc(100% - 64px)',
+    height: '100% - 4px)',
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
@@ -34,15 +41,19 @@ function App() {
       <NavBar links={linksConfig}/>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth="xl" className={classes.container}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switcher routes={routerConfig} auth={true} />
-          </Suspense>
-          </Container>
+          <div className={classes.workspace} >
+            {rootStoreUI.inProgress && <LinearProgress color="secondary"/>}
+            <Container maxWidth="xl" className={classes.container}>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switcher routes={routerConfig} auth={true} />
+            </Suspense>
+            <Snackbar />
+            </Container>
+          </div>
         </main>
       </div>
     </BrowserRouter>
   );
 }
 
-export default App;
+export default observer(App);
