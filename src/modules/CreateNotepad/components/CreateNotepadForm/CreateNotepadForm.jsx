@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 16
   },
   sectionDivider: {
-    margin: '10px 0 10px 0'
+    padding: '15px 0 15px 0'
   },
   button: {
     margin: theme.spacing(1),
@@ -68,8 +68,7 @@ const CreateNotepadForm = (props) => {
                 />
               </Grid>
             </Grid>
-            <Divider className={classes.sectionDivider}/>
-            <Grid item xs={12}>
+            <Grid item className={classes.sectionDivider} xs={12}>
               <Typography variant="h6" component="h6">Notes</Typography>
             </Grid>
             <FieldArray name="notes">
