@@ -5,6 +5,7 @@ export class NotepadAPI extends Service {
   base = apis.GISTS_URL;
   routes = {
     gists: '/gists',
+    public: '/gists/public'
   }
 
   constructor(api) {
@@ -30,6 +31,10 @@ export class NotepadAPI extends Service {
 
   deleteById(id) {
     return this.delete(`${this.routes.gists}/${id}`, { baseURL: this.base })
+  }
+
+  getGistsPublicList(options) {
+    return this.get(this.routes.public, { baseURL: this.base, ...options })
   }
   
 }

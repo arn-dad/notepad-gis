@@ -16,7 +16,7 @@ class CreateNotepadStore {
     try {
       const response = await api.notepad.create({ data: notepad })
       rootStoreUI.openAlert({ message: 'Notepad successfully created!' });
-      console.log("createNotepad ~ response", response);
+      console.info("createNotepad ~ response", response);
     } catch (error) {
       const { message } = httpErrorHandler(error);
       rootStoreUI.openAlert({ severity: 'error', message });
@@ -32,7 +32,7 @@ class CreateNotepadStore {
     try {
       const response = await api.notepad.update(id, { data: notepad });
       rootStoreUI.openAlert({ message: 'Notepad successfully updated!' });
-      console.log("updateNotepad ~ response", response);
+      console.info("updateNotepad ~ response", response);
     } catch (error) {
       const { message } = httpErrorHandler(error);
       rootStoreUI.openAlert({ severity: 'error', message });

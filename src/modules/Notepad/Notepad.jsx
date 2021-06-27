@@ -58,6 +58,11 @@ const Notepad = observer((props) => {
             />
           )
         })}
+        {!notepadStore.notepads.length && (
+          <Grid container justify="center">
+            No Notepad to show.
+          </Grid>
+        )}
       </Grid>
     </div>
   );

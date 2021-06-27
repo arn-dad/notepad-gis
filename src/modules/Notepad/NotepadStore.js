@@ -15,7 +15,7 @@ class NotepadStore {
     try {
       const response = await api.notepad.getGistsList();
       runInAction(() => { this.notepads = response.data; });
-      console.log("getGistsList ~ response", response);
+      console.info("getGistsList ~ response", response);
     } catch (error) {
       const { message } = httpErrorHandler(error);
       rootStoreUI.openAlert({ severity: 'warning', message });
@@ -32,7 +32,7 @@ class NotepadStore {
       runInAction(() => {
         this.notepads = this.notepads.filter(note => note.id !== id);
       })
-      console.log("deleteById ~ response", response);
+      console.info("deleteById ~ response", response);
     } catch (error) {
       const { message } = httpErrorHandler(error);
       rootStoreUI.openAlert({ severity: 'error', message });
