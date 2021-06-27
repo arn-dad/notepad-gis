@@ -19,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
   workspace: {
     height: 'calc(100% - 64px)',
+    position: 'relative'
+  },
+  progressBar: {
+    position: 'absolute',
+    width: '100%',
   },
   content: {
     flexGrow: 1,
@@ -42,7 +47,7 @@ function App() {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <div className={classes.workspace} >
-            {rootStoreUI.inProgress && <LinearProgress color="secondary"/>}
+            {rootStoreUI.inProgress && <LinearProgress className={classes.progressBar} color="secondary"/>}
             <Container maxWidth="xl" className={classes.container}>
             <Suspense fallback={<div>Loading...</div>}>
               <Switcher routes={routerConfig} auth={true} />
