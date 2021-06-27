@@ -1,10 +1,8 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import rootStoreUI from "stores/RootStoreUI";
 import api from '@services/api';
-import { httpErrorHandler } from '@utilities/httpHandlers/httpErrorHandler'
-import durationDiff from '@utilities/dates/durationDiff'
-
-
+import { httpErrorHandler } from '@utilities/httpHandlers/httpErrorHandler';
+import durationDiff from '@utilities/dates/durationDiff';
 
 class DashboardStore {
   gists = [];
@@ -12,7 +10,6 @@ class DashboardStore {
   chartData = {};
   per_page = 30;
   page = 0;
-
 
   constructor() {
     makeAutoObservable(this)
@@ -42,7 +39,7 @@ class DashboardStore {
     
     for (let i = 0; i < gists.length; i++) {
       const diff = durationDiff(currentDate, gists[i].created_at).asSeconds();
-      if(diff <= 60) {
+      if(diff <= 5) {
         data[data.length - 1] = data[data.length - 1] + 1;
       } else {
         currentDate = gists[i].created_at;

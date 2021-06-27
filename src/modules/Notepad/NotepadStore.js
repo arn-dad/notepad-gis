@@ -22,7 +22,7 @@ class NotepadStore {
       const response = await api.notepad.getGistsList();
 
       if(!this.compare(gists, response.data)) {
-        Storage.set('gists', response.data)
+        Storage.set('gists', response.data);
         runInAction(() => { this.notepads = response.data; });
       }
       console.info("getGistsList ~ response", response);
@@ -41,6 +41,7 @@ class NotepadStore {
       rootStoreUI.openAlert({ message: 'Notepad successfully deleted!' });
       runInAction(() => {
         this.notepads = this.notepads.filter(note => note.id !== id);
+        Storage.set('gists', this.notepads);
       })
       console.info("deleteById ~ response", response);
     } catch (error) {
