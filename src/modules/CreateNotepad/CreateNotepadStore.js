@@ -16,6 +16,8 @@ class CreateNotepadStore {
     try {
       const response = await api.notepad.create({ data: notepad })
       rootStoreUI.openAlert({ message: 'Notepad successfully created!' });
+      const updatedNotepad = this.updateLocalNotepadData(response.data.id, response.data);
+      runInAction(() => { this.notepadForm = updatedNotepad });
       console.info("createNotepad ~ response", response);
     } catch (error) {
       const { message } = httpErrorHandler(error);
@@ -44,13 +46,9 @@ class CreateNotepadStore {
 
   async getNotepad(id) {
     rootStoreUI.startProgress();
-    const notepad =  { id };
-
     try {
       const response = await api.notepad.getNotepadById(id);
-      const content = JSON.parse(response.data.files.notepad.content);
-      notepad.title =  content.title;
-      notepad.notes =  content.notes;
+      const notepad = this.updateLocalNotepadData(id, response.data);
       runInAction(() => { this.notepadForm = notepad });
     } catch (error) {
       const { message } = httpErrorHandler(error);
@@ -83,6 +81,14 @@ class CreateNotepadStore {
       public: true,
       files: {}
     }
+  }
+
+  updateLocalNotepadData(id, data) {
+    const notepad = { id };
+    const content = JSON.parse(data.files.notepad.content);
+    notepad.title =  content.title;
+    notepad.notes =  content.notes;
+    return notepad;
   }
 }
 
