@@ -15,18 +15,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { notepadSchema } from '../../schema/notepad.schema';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-    },
-  },
   paperWrapper: {
     padding: 16
   },
   sectionDivider: {
     padding: '15px 0 15px 0'
   },
-  button: {
+  sendBtn: {
     margin: theme.spacing(1),
   }
 }))
@@ -121,7 +116,7 @@ const CreateNotepadForm = (props) => {
                   })}
                   <Grid container item className={classes.sectionDivider} alignItems="center" spacing={0} xs={12}>
                     <Button
-                      className={classes.button}
+                      className={classes.sendBtn}
                       variant="contained" 
                       color="primary" 
                       type="submit" 
