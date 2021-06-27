@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import api from '@services/api';
 
 class CreateNotepadStore {
@@ -22,9 +22,14 @@ class CreateNotepadStore {
   }
 
   async getNotepad(id) {
+    const notepad =  { id }
     const response = await api.notepad.getNotepadById(id);
     const content = JSON.parse(response.data.files.notepad.content);
-    this.notepadForm = { id, ...content };
+    notepad.title =  content.title
+    notepad.notes =  content.notes
+    runInAction(() => {
+      this.notepadForm = notepad
+    })
   }
 
   prepareNotepad(data) {
@@ -39,7 +44,9 @@ class CreateNotepadStore {
   }
 
   reset() {
-    this.notepadForm = { id: null, title: '', notes: [ { id: null, title: '', note: '' } ] }
+    runInAction(() => {
+      this.notepadForm = { id: null, title: '', notes: [ { id: null, title: '', note: '' } ] }
+    })
   }
 
   createTemplate() {

@@ -26,7 +26,7 @@ const CreateNotepad = observer((props) => {
     return () => {
       createNotepadStore.reset()
     }
-  }, [])
+  }, [props.location.search])
 
   const handleNavigateBack = () => {
     props.history.goBack();

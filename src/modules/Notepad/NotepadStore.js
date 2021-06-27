@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import api from '@services/api';
 
 class NotepadStore {
@@ -10,12 +10,18 @@ class NotepadStore {
 
   async getGistsList() {
     const response = await api.notepad.getGistsList();
-    this.notepads = response.data;
+    runInAction(() => {
+      this.notepads = response.data;
+    })
+    console.log("getGistsList ~ response", response);
   }
 
   async deleteById(id) {
     const response = await api.notepad.deleteById(id);
-    this.notepads = this.notepads.filter(note => note.id !== id);
+    runInAction(() => {
+      this.notepads = this.notepads.filter(note => note.id !== id);
+    })
+    console.log("deleteById ~ response", response);
   }
 }
 
