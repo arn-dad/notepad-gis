@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   container: {
-    height: '100% - 4px)',
+    height: 'calc(100% - 4px)',
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
