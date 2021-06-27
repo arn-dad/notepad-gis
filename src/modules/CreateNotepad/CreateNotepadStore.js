@@ -84,6 +84,9 @@ class CreateNotepadStore {
   }
 
   updateLocalNotepadData(id, data) {
+    if(!data.files.notepad) {
+      throw new Error('Requires authentication');
+    }
     const notepad = { id };
     const content = JSON.parse(data.files.notepad.content);
     notepad.title =  content.title;
