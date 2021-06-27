@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { observer } from 'mobx-react-lite';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import CreateNotepadForm from './components/CreateNotepadForm';
 import createNotepadStore from './CreateNotepadStore';
