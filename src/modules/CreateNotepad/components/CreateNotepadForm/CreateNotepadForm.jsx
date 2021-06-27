@@ -119,6 +119,7 @@ const CreateNotepadForm = (props) => {
                       </Grid>
                     );
                   })}
+                  <Grid container item className={classes.sectionDivider} alignItems="center" spacing={0} xs={12}>
                     <Button
                       className={classes.button}
                       variant="contained" 
@@ -134,8 +135,9 @@ const CreateNotepadForm = (props) => {
                         push({ id: generateId(),  title: '', note: '' })
                       }}
                     >
-                    <AddIcon />
-                  </IconButton>
+                      <AddIcon />
+                    </IconButton>
+                  </Grid>
                 </>
               )}
             </FieldArray>
