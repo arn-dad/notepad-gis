@@ -11,9 +11,8 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Edit from '@material-ui/icons/Edit';
+import Visibility from '@material-ui/icons/Visibility';
 import DeleteOutline from '@material-ui/icons/DeleteOutline';
-
 import { dates } from '@utilities';
 
 const useStyles = makeStyles((theme) => ({
@@ -72,9 +71,9 @@ const NotepadCard = (props) => {
         <List component="nav">
         <ListItem button onClick={() => props.onEditNotepad(id)}>
           <ListItemIcon>
-            <Edit />
+            <Visibility />
           </ListItemIcon>
-          <ListItemText primary="Edit" />
+          <ListItemText primary="View" />
         </ListItem>
         <ListItem button>
           <ListItemIcon onClick={() => props.onDeleteNotepad(id)}>
