@@ -5,7 +5,7 @@ class RootStoreUI {
   alert = { 
     open: false,
     severity: 'success',
-    autoHideDuration: 4000,
+    autoHideDuration: 3000,
     message: 'Done!'
   };
 
@@ -24,7 +24,7 @@ class RootStoreUI {
   openAlert({ 
     open = true,
     severity = 'success',
-    autoHideDuration = 4000,
+    autoHideDuration = 3000,
     message = 'Done!'
    }) {
     runInAction(() => {

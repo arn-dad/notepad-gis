@@ -74,8 +74,8 @@ const NotepadCard = (props) => {
           </ListItemIcon>
           <ListItemText primary="View" />
         </ListItem>
-        <ListItem button>
-          <ListItemIcon onClick={() => props.onDeleteNotepad(id)}>
+        <ListItem button onClick={() => props.onDeleteNotepad(id)}>
+          <ListItemIcon>
             <DeleteOutline />
           </ListItemIcon>
           <ListItemText primary="Delete" />

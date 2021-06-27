@@ -6,8 +6,8 @@ import Button from '@material-ui/core/Button';
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import IconButton from '@material-ui/core/IconButton';
-import RemoveIcon from '@material-ui/icons/Remove';
-import AddIcon from '@material-ui/icons/Add';
+import HighlightOff from '@material-ui/icons/HighlightOff';
+import PlusOne from '@material-ui/icons/PlusOne';
 import Icon from '@material-ui/core/Icon';
 import { FieldArray, Form, Formik, getIn } from 'formik';
 import { generateId } from '@utilities/uuid/generateId'
@@ -98,10 +98,10 @@ const CreateNotepadForm = (props) => {
                         </Grid>
                         <Grid container justify="center" item xs={2}>
                           <IconButton color="secondary" disabled={values.notes.length === 1} onClick={() => remove(index)}>
-                            <RemoveIcon />
+                            <HighlightOff />
                           </IconButton>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={10}>
                           <TextField
                             fullWidth
                             name={note}
@@ -135,7 +135,7 @@ const CreateNotepadForm = (props) => {
                         push({ id: generateId(),  title: '', note: '' })
                       }}
                     >
-                      <AddIcon />
+                      <PlusOne />
                     </IconButton>
                   </Grid>
                 </>
