@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import rootStoreUI from "stores/RootStoreUI";
 import api from '@services/api';
+import Storage from '@services/Storage';
 import { httpErrorHandler } from '@utilities/httpHandlers/httpErrorHandler'
 
 class NotepadStore {
@@ -8,13 +9,22 @@ class NotepadStore {
 
   constructor() {
     makeAutoObservable(this)
+    const gists = Storage.get('gists');
+    if(gists) {
+      runInAction(() => { this.notepads = gists; });
+    }
   }
 
   async getGistsList() {
     rootStoreUI.startProgress();
     try {
+      const gists = Storage.get('gists');
       const response = await api.notepad.getGistsList();
-      runInAction(() => { this.notepads = response.data; });
+
+      if(!this.compare(gists, response.data)) {
+        Storage.set('gists', response.data)
+        runInAction(() => { this.notepads = response.data; });
+      }
       console.info("getGistsList ~ response", response);
     } catch (error) {
       const { message } = httpErrorHandler(error);
@@ -39,6 +49,10 @@ class NotepadStore {
     } finally {
       rootStoreUI.endProgress();
     }
+  }
+
+  compare(prevGists, nextGists) {
+    return JSON.stringify(prevGists) === JSON.stringify(nextGists);
   }
 }
 

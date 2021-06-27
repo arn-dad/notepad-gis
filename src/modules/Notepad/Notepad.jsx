@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const Notepad = observer((props) => {
   const classes = useStyles();
   useEffect(() => {
-    notepadStore.getGistsList()
+    notepadStore.getGistsList();
   }, [])
 
   const handleEditNotepad = (id) => {

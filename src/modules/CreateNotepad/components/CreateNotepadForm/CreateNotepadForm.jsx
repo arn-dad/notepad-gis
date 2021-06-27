@@ -126,7 +126,7 @@ const CreateNotepadForm = (props) => {
                       type="submit" 
                       endIcon={<Icon>send</Icon>}
                     >
-                      Create
+                      Save
                     </Button>
                     <IconButton
                       color="primary"
