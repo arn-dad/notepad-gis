@@ -2,33 +2,52 @@ import { makeAutoObservable } from "mobx";
 import api from '@services/api';
 
 class CreateNotepadStore {
+  notepadForm = { id: null, title: '', notes: [ { id: null, title: '', note: '' } ] }
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  async createNotepad(data) {
-    const notepad = this.prepareNotepad(data);
-    const response = await api.createNotepad.create({ data: notepad });
+  async updateNotepad(data) {
+    const { id, ...rest } = data; 
+    const notepad = this.prepareNotepad(rest);
+    const response = await api.notepad.update(id, { data: notepad });
+    console.log("updateNotepad ~ response", response);
   }
 
+  async createNotepad(data) {
+    const notepad = this.prepareNotepad(data);
+    const response = await api.notepad.create({ data: notepad });
+    console.log("createNotepad ~ response", response);
+  }
+
+  async getNotepad(id) {
+    const response = await api.notepad.getNotepadById(id);
+    const content = JSON.parse(response.data.files.notepad.content);
+    this.notepadForm = { id, ...content };
+  }
 
   prepareNotepad(data) {
-
-    const template = {
-      description: 'new manuals',
-      public: true,
-      files: {}
-    }
-
-    template.files[Math.random()] = {
-      content: JSON.stringify({
-        title: 'Notepad Title',
-        notes: [{ title: 'sop', note: 'content' }]
-      })
+    const template = this.createTemplate()
+    template.description = data.title;
+    template.files.notepad = {
+      filename: 'notepad',
+      content: JSON.stringify(data)
     };
 
     return template;
+  }
+
+  reset() {
+    this.notepadForm = { id: null, title: '', notes: [ { id: null, title: '', note: '' } ] }
+  }
+
+  createTemplate() {
+    return {
+      description: '',
+      public: true,
+      files: {}
+    }
   }
 }
 

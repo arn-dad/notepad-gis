@@ -10,21 +10,29 @@ import notepadStore from './NotepadStore';
 const useStyles = makeStyles((theme) => ({
   header: {
     paddingBottom: 32,
+  },
+  notepadWrapper: {
+    '& > div': {
+      marginBottom: '10px',
+   }
   }
 }))
 
 const Notepad = observer((props) => {
   const classes = useStyles();
   useEffect(() => {
-    notepadStore.getGists()
+    notepadStore.getGistsList()
   }, [])
 
-  const handleEditNotepad = () => {
-
+  const handleEditNotepad = (id) => {
+    props.history.push({
+      pathname: '/create-notepad',
+      search: `id=${id}`,
+    })
   }
 
   const handleDeleteNotepad = (id) => {
-    notepadStore.deleteGists(id)
+    notepadStore.deleteById(id)
   }
 
   return (
@@ -39,16 +47,18 @@ const Notepad = observer((props) => {
           <ButtonLink to="/create-notepad">Create new Notepad</ButtonLink>
         </Grid>
       </Grid>
-      {notepadStore.notepads.map(gis => {
-        return (
-          <NotepadCard 
-            key={gis.id} 
-            gis={gis} 
-            onEditNotepad={handleEditNotepad} 
-            onDeleteNotepad={handleDeleteNotepad}
-          />
-        )
-      })}
+      <Grid className={classes.notepadWrapper}>
+        {notepadStore.notepads.map(gis => {
+          return (
+            <NotepadCard 
+              key={gis.id} 
+              gis={gis} 
+              onEditNotepad={handleEditNotepad} 
+              onDeleteNotepad={handleDeleteNotepad}
+            />
+          )
+        })}
+      </Grid>
     </div>
   );
 });

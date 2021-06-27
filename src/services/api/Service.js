@@ -1,5 +1,4 @@
 import { axios } from '@config/axios';
-
 export class Service {
   get(url, options) {
     return axios({ method: 'GET', url, ...options })

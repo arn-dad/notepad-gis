@@ -1,12 +1,10 @@
 import { axios } from '@config/axios';
-import { NotepadAPI } from '@modules/Notepad/NotepadAPI'
-import { CreateNotepadAPI } from '@modules/CreateNotepad/CreateNotepadAPI'
+import { NotepadAPI } from './gateways/NotepadAPI';
 
 class Api {
  
   constructor() {
     this.notepad = new NotepadAPI(this);
-    this.createNotepad = new CreateNotepadAPI(this);
   }
 
   setAuthorizationToken(token) {

@@ -8,13 +8,13 @@ class NotepadStore {
     makeAutoObservable(this)
   }
 
-  async getGists() {
-    const response = await api.notepad.getGists();
+  async getGistsList() {
+    const response = await api.notepad.getGistsList();
     this.notepads = response.data;
   }
 
-  async deleteGists(id) {
-    const response = await api.notepad.deleteGists(id);
+  async deleteById(id) {
+    const response = await api.notepad.deleteById(id);
     this.notepads = this.notepads.filter(note => note.id !== id);
   }
 }
