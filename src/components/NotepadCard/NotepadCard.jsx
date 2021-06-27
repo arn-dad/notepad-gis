@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const NotepadCard = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { gis: { description, owner, created_at, id } } = props;
+  const { gis: { description, owner, created_at, updated_at, id } } = props;
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -51,7 +51,13 @@ const NotepadCard = (props) => {
           </IconButton>
         }
         title={description}
-        subheader={dates.toDateFormat(created_at, dates.formats.long)}
+        subheader={(
+          <>
+          <i>Created date: {dates.toDateFormat(created_at, dates.formats.long)}</i>
+          {" | "}
+          <i>Lats updated date: {dates.toDateFormat(updated_at, dates.formats.full)}</i>
+          </>
+        )}
       />
       <Popover
         id={popoverId}

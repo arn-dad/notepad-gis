@@ -19,6 +19,9 @@ class NotepadStore {
     rootStoreUI.startProgress();
     try {
       const gists = Storage.get('gists');
+      if(gists) {
+        runInAction(() => { this.notepads = gists; });
+      }
       const response = await api.notepad.getGistsList();
 
       if(!this.compare(gists, response.data)) {
