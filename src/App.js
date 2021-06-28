@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Container from '@material-ui/core/Container';
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import { routerConfig } from '@config/router';
 import { linksConfig } from '@config/navigation';
@@ -50,7 +50,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <CssBaseline />
-        <BrowserRouter>
+        <HashRouter>
           <NavBar links={linksConfig}/>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
@@ -64,7 +64,7 @@ function App() {
               </Container>
             </div>
           </main>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     </ThemeProvider>
   );
