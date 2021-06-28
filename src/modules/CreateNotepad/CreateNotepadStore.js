@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import rootStoreUI from "stores/RootStoreUI";
 import api from '@services/api';
 import { httpErrorHandler } from '@utilities/httpHandlers/httpErrorHandler'
+import rootStoreUI from "stores/RootStoreUI";
 
 class CreateNotepadStore {
   notepadForm = { id: null, title: '', notes: [ { id: null, title: '', note: '' } ] }

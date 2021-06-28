@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { observer } from 'mobx-react-lite';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -10,8 +10,9 @@ import { linksConfig } from '@config/navigation';
 import { theme } from '@config/theme';
 import NavBar from '@components/NavBar';
 import Snackbar from '@components/Snackbar';
-import rootStoreUI from './stores/RootStoreUI';
-import Switcher from './Switcher';
+import Switcher from '@components/Switcher';
+import rootStoreUI from 'stores/RootStoreUI';
+import rootStore from 'stores/RootStore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,12 +41,17 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+
+  useEffect(() => {
+    rootStore.checkUserAuthentication();
+  },[])
+
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <div className={classes.root}>
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
         <CssBaseline />
-        <NavBar links={linksConfig}/>
+        <BrowserRouter>
+          <NavBar links={linksConfig}/>
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
             <div className={classes.workspace} >
@@ -58,9 +64,9 @@ function App() {
               </Container>
             </div>
           </main>
-        </div>
-      </ThemeProvider>
-    </BrowserRouter>
+        </BrowserRouter>
+      </div>
+    </ThemeProvider>
   );
 }
 

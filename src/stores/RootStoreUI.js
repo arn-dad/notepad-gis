@@ -1,5 +1,4 @@
 import { makeAutoObservable, runInAction } from "mobx";
-
 class RootStoreUI {
   inProgress = false;
   alert = { 
@@ -10,15 +9,15 @@ class RootStoreUI {
   };
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this);
   }
 
   startProgress() {
-    runInAction(() => this.inProgress = true)
+    runInAction(() => this.inProgress = true);
   }
 
   endProgress() {
-    runInAction(() => this.inProgress = false)
+    runInAction(() => this.inProgress = false);
   }
 
   openAlert({ 
@@ -36,7 +35,7 @@ class RootStoreUI {
   }
 
   closeAlert() {
-    runInAction(() => this.alert.open = false)
+    runInAction(() => this.alert.open = false);
   }
 }
 

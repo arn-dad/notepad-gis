@@ -1,8 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-
 /**
- * 
     Fonts:
   - Family: Arial
   - Main title: 24px

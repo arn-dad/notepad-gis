@@ -39,9 +39,7 @@ const Dashboard = () => {
   return (
     <Container maxWidth="lg">
       <Grid className={classes.header}>
-        <Typography variant="h5" component="h5">
-          Dashboard
-        </Typography>
+        <Typography variant="h5" component="h5">Dashboard</Typography>
       </Grid>
       <Grid container>
         <Grid container lg={6} md={12} spacing={6}>
