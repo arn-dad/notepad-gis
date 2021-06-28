@@ -7,7 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import IconButton from '@material-ui/core/IconButton';
 import HighlightOff from '@material-ui/icons/HighlightOff';
-import PlusOne from '@material-ui/icons/PlusOne';
+import Add from '@material-ui/icons/Add';
 import Icon from '@material-ui/core/Icon';
 import { FieldArray, Form, Formik, getIn } from 'formik';
 import { generateId } from '@utilities/uuid/generateId'
@@ -63,7 +63,7 @@ const CreateNotepadForm = (props) => {
               </Grid>
             </Grid>
             <Grid item className={classes.sectionDivider} xs={12}>
-              <Typography variant="h6" component="h6">Notes</Typography>
+              <Typography variant="h6" component="h6">My Notes</Typography>
             </Grid>
             <FieldArray name="notes">
               {({ push, remove }) => (
@@ -124,14 +124,13 @@ const CreateNotepadForm = (props) => {
                     >
                       Save
                     </Button>
-                    <IconButton
+                    <Button
                       color="primary"
-                      onClick={() => {
-                        push({ id: generateId(),  title: '', note: '' })
-                      }}
+                      onClick={() => push({ id: generateId(),  title: '', note: '' })}
+                      endIcon={<Add />}
                     >
-                      <PlusOne />
-                    </IconButton>
+                     Add note
+                    </Button> 
                   </Grid>
                 </>
               )}

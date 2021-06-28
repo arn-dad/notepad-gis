@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const NavigationLink = ({ label, to, Icon }) => {
   return (
-    <ListItem component={RouterLink} to={to}>
+    <ListItem style={{ color: '#334455' }} component={RouterLink} to={to}>
       <ListItemIcon>
         <Icon />
       </ListItemIcon>

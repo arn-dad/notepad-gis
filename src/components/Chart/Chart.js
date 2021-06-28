@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 const options = {
   scales: {
@@ -14,7 +14,7 @@ const options = {
 };
 
 const VerticalBar = ({ data }) => (
-  <Bar data={data} options={options} />
+  <Line data={data} options={options} />
 );
 
 export default React.memo(VerticalBar);

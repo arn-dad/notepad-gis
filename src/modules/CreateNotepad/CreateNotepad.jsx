@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { observer } from 'mobx-react-lite';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import CreateNotepadForm from './components/CreateNotepadForm';
 import createNotepadStore from './CreateNotepadStore';
@@ -41,21 +42,22 @@ const CreateNotepad = observer((props) => {
   }
 
   return (
-    <div>
+    <Container maxWidth="lg">
      <Grid container className={classes.header}>
-        <Grid>
-        <IconButton
-            color="primary"
-            onClick={handleNavigateBack}
-          >
-            <ChevronLeft />
-          </IconButton>
-        </Grid>
-      </Grid>
       <Grid>
-        <CreateNotepadForm form={createNotepadStore.notepadForm} onSave={handleCreateNotepad}/>
+        <Button
+          color="primary"
+          onClick={handleNavigateBack}
+          startIcon={<ChevronLeft />}
+        >
+        Go Back
+        </Button>
       </Grid>
-    </div>
+     </Grid>
+     <Grid>
+      <CreateNotepadForm form={createNotepadStore.notepadForm} onSave={handleCreateNotepad}/>
+     </Grid>
+    </Container>
   );
 });
 

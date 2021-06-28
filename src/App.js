@@ -4,9 +4,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Container from '@material-ui/core/Container';
 import { BrowserRouter } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
 import { routerConfig } from '@config/router';
 import { linksConfig } from '@config/navigation';
+import { theme } from '@config/theme';
 import NavBar from '@components/NavBar';
 import Snackbar from '@components/Snackbar';
 import rootStoreUI from './stores/RootStoreUI';
@@ -41,22 +42,24 @@ function App() {
   const classes = useStyles();
   return (
     <BrowserRouter>
-      <div className={classes.root}>
-      <CssBaseline />
-      <NavBar links={linksConfig}/>
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <div className={classes.workspace} >
-            {rootStoreUI.inProgress && <LinearProgress className={classes.progressBar} color="secondary"/>}
-            <Container maxWidth="xl" className={classes.container}>
-            <Suspense fallback={<div>Loading...</div>}>
-              <Switcher routes={routerConfig} auth={true} />
-            </Suspense>
-            <Snackbar />
-            </Container>
-          </div>
-        </main>
-      </div>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+        <CssBaseline />
+        <NavBar links={linksConfig}/>
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer} />
+            <div className={classes.workspace} >
+              {rootStoreUI.inProgress && <LinearProgress className={classes.progressBar} color="secondary"/>}
+              <Container maxWidth="xl" className={classes.container}>
+              <Suspense fallback={<div>Loading...</div>}>
+                <Switcher routes={routerConfig} auth={true} />
+              </Suspense>
+              <Snackbar />
+              </Container>
+            </div>
+          </main>
+        </div>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

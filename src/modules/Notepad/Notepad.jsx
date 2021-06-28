@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { observer } from 'mobx-react-lite';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import NotepadCard from '@components/NotepadCard';
@@ -36,10 +37,10 @@ const Notepad = observer((props) => {
   }
 
   return (
-    <div>
+    <Container maxWidth="lg">
       <Grid container className={classes.header} justify="space-between">
         <Grid>
-          <Typography variant="h6" component="h6">
+          <Typography variant="h5" component="h5">
             Notepad
           </Typography>
         </Grid>
@@ -64,7 +65,7 @@ const Notepad = observer((props) => {
           </Grid>
         )}
       </Grid>
-    </div>
+    </Container>
   );
 });
 
