@@ -55,7 +55,7 @@ const NotepadCard = (props) => {
           <>
           <i>Created date: {dates.toDateFormat(created_at, dates.formats.long)}</i>
           {" | "}
-          <i>Lats updated date: {dates.toDateFormat(updated_at, dates.formats.full)}</i>
+          <i>Last updated date: {dates.toDateFormat(updated_at, dates.formats.full)}</i>
           </>
         )}
       />
