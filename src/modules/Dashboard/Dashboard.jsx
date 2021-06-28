@@ -12,10 +12,8 @@ const useStyles = makeStyles((theme) => ({
   header: {
     paddingBottom: 32,
   },
-  notepadWrapper: {
-    '& > div': {
-      marginBottom: '10px',
-   }
+  controls: {
+    padding: '10px 0 10px 0',
   }
 }))
 
@@ -24,6 +22,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dashboardStore.getGistsPublicList();
+    dashboardStore.getGistsDateFilesRange();
     return () => {
       dashboardStore.reset();
     }
@@ -33,6 +32,10 @@ const Dashboard = () => {
     dashboardStore.getGistsPublicList();
   }
 
+  const handleLoadMoreFiles = () => {
+    dashboardStore.getGistsDateFilesRange();
+  }
+
   return (
     <Container maxWidth="lg">
       <Grid className={classes.header}>
@@ -40,19 +43,37 @@ const Dashboard = () => {
           Dashboard
         </Typography>
       </Grid>
-      <Grid container spacing={6}>
-        <Grid container alignItems="center" item>
-          <Grid item xs={12}>
-            <Chart data={dashboardStore.chartData} />
+      <Grid container>
+        <Grid container lg={6} md={12} spacing={6}>
+          <Grid container alignItems="center" item>
+            <Grid item xs={12}>
+              <Chart data={dashboardStore.chartData} />
+            </Grid>
+            <Grid container className={classes.controls} item justify="center" xs={12}>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={handleLoadMoreGist}
+                >
+                Load More gists
+              </Button>
+            </Grid>
           </Grid>
-          <Grid container item justify="center" xs={12}>
-            <Button 
-              variant="contained" 
-              color="primary" 
-              onClick={handleLoadMoreGist}
-              >
-              Load More
-            </Button>
+        </Grid>
+        <Grid container lg={6} md={12} spacing={6}>
+          <Grid container alignItems="center" item>
+            <Grid item xs={12}>
+              <Chart data={dashboardStore.fileChartData} />
+            </Grid>
+            <Grid container className={classes.controls} item justify="center" xs={12}>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={handleLoadMoreFiles}
+                >
+                Load More files
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

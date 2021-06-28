@@ -5,11 +5,11 @@ import { httpErrorHandler } from '@utilities/httpHandlers/httpErrorHandler';
 import durationDiff from '@utilities/dates/durationDiff';
 
 class DashboardStore {
-  gists = [];
-  data = [];
-  chartData = {};
-  per_page = 30;
-  page = 0;
+  chartData = this.generateChartData([], { label: 'Created Gists' });
+  fileChartData = this.generateChartData([], { label: 'Created Gists files' });
+
+  dataPage = 0;
+  filePage = 0;
 
   constructor() {
     makeAutoObservable(this)
@@ -18,13 +18,30 @@ class DashboardStore {
   async getGistsPublicList() {
     rootStoreUI.startProgress();
     try {
-      this.page = this.page + 1;
-      const response = await api.notepad.getGistsPublicList({ params: { page: this.page, per_page: this.per_page } });
-      const data = this.transformGists(response.data)
-      runInAction(() => { this.data = [ ...this.data, ...data ] });
-      const chart = this.generateChartData(this.data);
+      this.dataPage = this.dataPage + 1;
+      const response = await api.notepad.getGistsPublicList({ params: { page: this.dataPage, per_page: 30 } });
+      const data = this.transformGists(response.data);
+
+      const chart = this.generateChartData([...this.chartData.datasets[0].data, ...data], { label: 'Created Gists' });
       runInAction(() => { this.chartData = chart });
-      console.info("getGistsPublicList ~ response", this.data.length);
+      console.log("getGistsPublicList ~ response", response);
+    } catch (error) {
+      const { message } = httpErrorHandler(error);
+      rootStoreUI.openAlert({ severity: 'warning', message });
+    } finally {
+      rootStoreUI.endProgress();
+    }
+  }
+
+  async getGistsDateFilesRange() {
+    rootStoreUI.startProgress();
+    try {
+      this.filePage = this.filePage + 1;
+      const response = await api.notepad.getGistsPublicList({ params: { page: this.filePage, per_page: 30 } });
+      const files = this.transformGitsFiles(response.data);
+      const chart = this.generateChartData([...this.fileChartData.datasets[0].data, ...files], { label: 'Created Gists files' });
+      runInAction(() => { this.fileChartData = chart });
+      console.log("getGistsDateFilesRange ~ response", response);
     } catch (error) {
       const { message } = httpErrorHandler(error);
       rootStoreUI.openAlert({ severity: 'warning', message });
@@ -49,12 +66,29 @@ class DashboardStore {
     return data;
   }
 
-  generateChartData(data) {
+  transformGitsFiles(gists) {
+    const data = [0];
+    let currentDate = gists[0].created_at;
+
+    for (let i = 0; i < gists.length; i++) {
+      const diff = durationDiff(currentDate, gists[i].created_at).asSeconds();
+      const filesCount = Object.keys(gists[i].files).length;
+      if(diff <= 5) {
+        data[data.length - 1] = data[data.length - 1] + filesCount;
+      } else {
+        currentDate = gists[i].created_at;
+        data.push(filesCount);
+      }
+    }
+    return data;
+  }
+
+  generateChartData(data, { label }) {
     return {
       labels: data,
       datasets: [
         {
-          label: 'Gists Created',
+          label,
           data,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -79,11 +113,12 @@ class DashboardStore {
   }
  
   reset() {
-    this.gists = [];
-    this.data = [];
-    this.chartData = {};
-    this.per_page = 30;
-    this.page = 0;
+    this.chartData = this.generateChartData([], { label: 'Created Gists' });
+    this.fileChartData = this.generateChartData([], { label: 'Created Gists files' });
+
+    this.dataPage = 0;
+    this.filePage = 0;
+
   }
 }
 
